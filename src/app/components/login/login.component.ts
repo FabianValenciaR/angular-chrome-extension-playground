@@ -9,20 +9,20 @@ import { UserService } from "src/app/services/user.service";
 export class LoginComponent implements OnInit {
   email: string = "";
   password: string = "";
+  isLoggedIn: boolean = false;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {}
 
   doLogin() {
-    console.log(this.email, this.password);
     this.userService
       .userLogIn(this.email, this.password)
       .then((response) => {
-        console.log("Success!!!");
+        this.isLoggedIn = true;
       })
       .catch((error) => {
-        console.error(error);
+        this.isLoggedIn = false;
       });
   }
 }

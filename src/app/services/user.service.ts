@@ -39,7 +39,6 @@ export class UserService {
           userConfirmationNecessary?: boolean
         ) => {
           this.cognitoSession = session;
-          console.log(this.cognitoSession);
 
           resolve({
             rType: 'success',
@@ -48,7 +47,6 @@ export class UserService {
           });
         },
         onFailure: (err: any) => {
-          console.error(err);
           
           reject({
             rType: 'error',
