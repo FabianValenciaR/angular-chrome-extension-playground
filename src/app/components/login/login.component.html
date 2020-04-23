@@ -1,0 +1,31 @@
+<div class="app-wrapper">
+    <div class="slydeck-icon">
+        <a href="http://app.slydeck.io" target="_blank"><img src="./assets/logo-login.png" height="60" /></a>
+    </div>
+    <div class="login-form">
+        <form>
+            <div>
+                <label for="txtEmail">Email</label>
+                <input id="txtEmail" name="txtEmail" type="text" class="form-control" />
+            </div>
+            <div>
+                <label for="txtPwd">Password</label>
+                <input id="txtPwd" name="txtPwd" type="password" class="form-control" />
+                <div>
+                    <a [routerLink]="['/recover']" style="text-decoration: none;">Forgot your password?</a>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-orange w70" type="submit">
+                    LOG IN
+                </button>
+                <div>
+                    Don't have an account?
+                </div>
+                <div>
+                    <a>Sign Up</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
