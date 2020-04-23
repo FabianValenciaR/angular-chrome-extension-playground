@@ -1,32 +1,36 @@
-<div class="app-wrapper">
-    <div class="slydeck-icon">
-        <a href="http://app.slydeck.io" target="_blank"><img src="./assets/logo-login.png" height="60" /></a>
-    </div>
-    <div class="login-form">
-        <form>
-            <div>
-                <label for="txtEmail">Email</label>
-                <input [(ngModel)]="email" id="txtEmail" name="txtEmail" type="text" class="form-control" />
-            </div>
-            <div>
-                <label for="txtPwd">Password</label>
-                <input [(ngModel)]="password" id="txtPwd" name="txtPwd" type="password" class="form-control" />
-                <div>
-                    <a [routerLink]="['/recover']" style="text-decoration: none;">Forgot your password?</a>
+<body>
+        <div class="card-body app-wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center mb-3">
+                        <img class="mb-5" src="./assets/logo-login.png" height="60" />
+                    </div>
+                    <form>
+                        <div class="form-group mb-2">
+                            <label for="txtEmail">Email</label>
+                            <input [(ngModel)]="email" id="txtEmail" name="txtEmail" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group mb-5">
+                            <label for="txtPwd">Password</label>
+                            <input [(ngModel)]="password" id="txtPwd" name="txtPwd" type="password"
+                                class="form-control" />
+                            <div class="text-blue text-right">
+                                <a [routerLink]="['/recover']" style="text-decoration: none;">Forgot your password?</a>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <button class="btn-orange w70" type="submit" (click)="doLogin()">
+                                LOG IN {{this.isLoggedIn}}
+                            </button>
+                            <div class="text-grey text-center mt-3">
+                                Don't have an account?
+                            </div>
+                            <div class="text-blue text-center">
+                                <a class="btn-signup-onlogin" [routerLink]="['/signup']">Sign Up</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div>
-                <button (click)="doLogin()" class="btn btn-orange w70" type="submit">
-                    LOG IN
-                </button>
-                <div>{{this.isLoggedIn}}</div>
-                <div>
-                    Don't have an account?
-                </div>
-                <div>
-                    <a>Sign Up</a>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
+</body>
