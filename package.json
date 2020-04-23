@@ -44,6 +44,7 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3",
-    "webpack-extension-reloader": "^1.1.4"
+    "webpack-extension-reloader": "^1.1.4",
+    "@babel/compat-data": "~7.8.0"
   }
 }
