@@ -6,11 +6,11 @@
         <form>
             <div>
                 <label for="txtEmail">Email</label>
-                <input id="txtEmail" name="txtEmail" type="text" class="form-control" />
+                <input [(ngModel)]="email" id="txtEmail" name="txtEmail" type="text" class="form-control" />
             </div>
             <div>
                 <label for="txtPwd">Password</label>
-                <input id="txtPwd" name="txtPwd" type="password" class="form-control" />
+                <input [(ngModel)]="password" id="txtPwd" name="txtPwd" type="password" class="form-control" />
                 <div>
                     <a [routerLink]="['/recover']" style="text-decoration: none;">Forgot your password?</a>
                 </div>

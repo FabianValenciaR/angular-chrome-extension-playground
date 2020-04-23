@@ -1,23 +1,24 @@
 /**
  * This file defines the variables needed for the application to work
- * in *production*
+ * in *staging*
  */
+import 'zone.js/dist/zone-error'; // Included with Angular CLI.
 import configurationInterface from './configurationInterface';
 
 const envconf: configurationInterface = {
   production: true,
-  baseCookieDomain: 'slydeck.io',
-  //StripeClient: Stripe('pk_live_y2fIAEP86DorjK7Q9TxoqDkD009uIv41EC'),
+  baseCookieDomain: 'slydeck-dev-webapp.s3-website.us-east-2.amazonaws.com',
+  //StripeClient: Stripe('pk_test_hjsPjuvA00y20tdlUR9CHbaY00ahRv6Pef'),
 
-  AwsApiId: '754mkar96b',
+  AwsApiId: 's3stbzwsbb',
   AwsRegion: 'us-west-2',
-  CognitoClientId: '1ao7t3qt39b1rnq0rrnsqukgm',
-  CognitoIdentityPoolId: 'us-west-2:fbffd849-1d30-4186-b1a6-f0414f0b5eb5',
-  CognitoUserPoolId: 'us-west-2_vqv7IVKl3',
-  OriginalFilesBucketName: 'slydeck-production-stack-originalfilesbucket-1dacfopitkzyn',
-  StageName: 'Production',
-  UnauthWebsocketApiId: 'aynvi40x5e',
-  UserFilesBucketName: 'slydeck-production-stack-userfilesbucket-15tyzhmg9ue4h'
+  CognitoClientId: '4jj60f88fn480d9bf79o08sudo',
+  CognitoIdentityPoolId: 'us-west-2:e3d0f830-c17c-4890-bf80-b8b17ad99b41',
+  CognitoUserPoolId: 'us-west-2_DwKjsezem',
+  OriginalFilesBucketName: 'slydeck-staging-stack-originalfilesbucket-12wtajq2y40sw',
+  StageName: 'Staging',
+  UnauthWebsocketApiId: '2oq68awmhj',
+  UserFilesBucketName: 'slydeck-staging-stack-userfilesbucket-1rrmhb2zzz11x'
 };
 
 export const environment: configurationInterface = {
