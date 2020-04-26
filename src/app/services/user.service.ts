@@ -58,4 +58,8 @@ export class UserService {
       });
     });
   }
+
+  async getJwtToken(): Promise<string> {
+    return this.cognitoSession.getIdToken().getJwtToken();
+  }
 }
