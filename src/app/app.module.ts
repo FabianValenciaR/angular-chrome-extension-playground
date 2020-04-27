@@ -10,6 +10,7 @@ import { UserService } from './services/user.service';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilesContainerComponent } from './components/files-container/files-container.component';
+import { FileCardComponent } from './components/file-card/file-card.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FilesContainerComponent } from './components/files-container/files-cont
     AppComponent,
     LoginComponent,
     HomeComponent,
-    FilesContainerComponent
+    FilesContainerComponent,
+    FileCardComponent
   ],
   imports: [
     BrowserModule,

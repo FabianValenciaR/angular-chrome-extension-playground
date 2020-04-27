@@ -1,11 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.app-wrapper{
+    padding: 2%;
+    width: 400px;
+    min-height: 500px;
+}
+
 .btn-orange {
     color: #fff;
     padding: 10px;
     font-weight: 700;
     background-color: #f47c26;
     border: 1px solid #f47c26;
-    min-width: 90px;
+    min-width: 60px;
     font-size: 13px;
     border-radius: 3px;
     font-family: HelveticaNeue,Helvetica;

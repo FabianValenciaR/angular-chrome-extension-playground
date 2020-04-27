@@ -1,0 +1,29 @@
+.file-card {
+    margin: 2% 0%;
+    width: 100%;
+    height: 65px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 0.5rem #99999944;
+}
+
+.card-title {
+    margin: 0px !important;
+    width: 60%;
+    color: #fd7e14;
+}
+
+.card-icon {
+    width: 20%;
+}
+
+.card-button {
+    width: 20%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
