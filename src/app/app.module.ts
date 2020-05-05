@@ -11,6 +11,9 @@ import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilesContainerComponent } from './components/files-container/files-container.component';
 import { FileCardComponent } from './components/file-card/file-card.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -19,13 +22,16 @@ import { FileCardComponent } from './components/file-card/file-card.component';
     LoginComponent,
     HomeComponent,
     FilesContainerComponent,
-    FileCardComponent
+    FileCardComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

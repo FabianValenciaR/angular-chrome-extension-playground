@@ -301,4 +301,16 @@ export class UserService {
       this.currentDomain = new URL(window.location.href).origin;
     }
   }
+
+  userLogOut() {
+    this.cognitoUser.signOut();
+    // @ts-ignore
+    AWS.config.credentials.clearCachedId();
+
+    this.clearUserCookies();
+  }
+
+  private clearUserCookies() {
+    localStorage.removeItem(this.cookie_currentUser_name);
+  }
 }
