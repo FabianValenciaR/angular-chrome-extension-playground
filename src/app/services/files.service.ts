@@ -11,8 +11,15 @@ export class FilesService {
   public totalFiles: FileModel[] = [];
   private fileServiceHearbeatID: NodeJS.Timer;
 
-
   constructor(public userService: UserService, private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.getFiles();
+  }
+
+  ngOnDestroy() {
+    this.stopHearBeat();
+  }
 
   async startHearbeat() {
     if (!this.fileServiceHearbeatID) {
@@ -22,7 +29,19 @@ export class FilesService {
       }, 8000);
     }
   }
-  
+
+  stopHearBeat() {
+    if (this.fileServiceHearbeatID) {
+      clearInterval(this.fileServiceHearbeatID);
+      this.fileServiceHearbeatID = undefined;
+      this.ClearFiles();
+    }
+  }
+
+  ClearFiles() {
+    this.totalFiles = new Array<FileModel>();
+  }
+
   async getFiles() {
     const token = await this.userService.getJwtToken();
 
@@ -37,9 +56,10 @@ export class FilesService {
       .subscribe((data: Array<any>) => {
         // @ts-ignore
         // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < data.length; i++) {
-          // Validate if this item already exists in the array, otherwise push it
-          if (data) {
+        if (data) {
+          this.totalFiles = [];
+          for (let i = 0; i < data.length; i++) {
+            // Validate if this item already exists in the array, otherwise push it
             const file = new FileModel();
             file.Key = data[i].Key;
             file.Name = data[i].Key.split("/")[1];

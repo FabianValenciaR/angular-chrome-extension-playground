@@ -1,3 +1,4 @@
+import { FileModel } from "./../../interfaces/file-interface";
 import { Component, OnInit } from "@angular/core";
 import { FilesService } from "src/app/services/files.service";
 
@@ -7,9 +8,11 @@ import { FilesService } from "src/app/services/files.service";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
+
   constructor(public filesService: FilesService) {}
 
   ngOnInit() {
+    this.filesService.getFiles();
     this.filesService.startHearbeat();
   }
 }
