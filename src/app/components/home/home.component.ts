@@ -1,5 +1,5 @@
 import { FileModel } from "./../../interfaces/file-interface";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FilesService } from "src/app/services/files.service";
 
 @Component({
@@ -8,11 +8,19 @@ import { FilesService } from "src/app/services/files.service";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
+  @Output() public receiveTxt2Search = new EventEmitter<string>();
+  public str2Search: string;
 
-  constructor(public filesService: FilesService) {}
+  constructor(public filesService: FilesService) {
+    this.str2Search = "";
+  }
 
   ngOnInit() {
     this.filesService.getFiles();
     this.filesService.startHearbeat();
+  }
+
+  sendTxt2Search(str2Search: string) {
+    this.str2Search = str2Search;
   }
 }
