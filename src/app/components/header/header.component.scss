@@ -1,9 +1,10 @@
-.btn-logout {
+.btn-text-orange {
     color: #f47c26 !important;
     cursor: pointer;
 }
 
 .header-wrapper {
+    display: flex;
+    justify-content: space-between;
     border-bottom: 3px solid #efefef;
-    text-align: end;
 }

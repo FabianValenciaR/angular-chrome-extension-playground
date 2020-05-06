@@ -1,1 +1,46 @@
-<p>share works!</p>
+<div class="app-wrapper">
+    <br />
+    <h6 class="text-share"><b>Share presentation via email</b></h6>
+    <p class="text-share">
+        We make it easy to share the presentation with anyone who has an email address.
+    </p>
+    <p class="text-share">
+        To share the file, write the email you wish to share to in the box below. You can add multiple
+        emails by pressing enter. You can share with a maximum of 15 emails at a time.
+    </p>
+    <div class="input-group form-group">
+        <input [(ngModel)]="localEmail" name="txtEmail" type="text" email
+            class="form-control input-form {{ validationEmail }}" placeholder="Email" style="font-size: smaller;"
+            (keyup)="addEmail($event)" />
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="font-size: smaller;">
+                <fa-icon [icon]="faEnvelope"></fa-icon>
+            </span>
+        </div>
+    </div>
+    <ul *ngIf="Emails.length" class="list-group list-group-flush">
+        <li *ngFor="let email of Emails; let i = index" id="email{{ i }}" class="list-group-item list-group-item-light">
+            {{ email }}
+            <span (click)="removeEmail(i)" style="float: right; cursor: pointer;">
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </span>
+        </li>
+    </ul>
+    <br />
+    <div class="input-group form-group">
+        <textarea [(ngModel)]="emailBody" name="txtEmailBody" class="form-control input-form" cols="45" rows="5"
+            placeholder="Type sharing file email text here..."></textarea>
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <fa-icon [icon]="faEnvelopeOpenText"></fa-icon>
+            </span>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-orange shareButton btn-share" type="button">
+            SHARE
+            <fa-icon [icon]="faShareAlt" size="lg"></fa-icon>
+        </button>
+    </div>
+    <br />
+</div>

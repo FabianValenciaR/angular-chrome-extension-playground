@@ -3,5 +3,8 @@
         <img src="./assets/pdf-icon.png" height="50px" />
     </div>
     <div class="card-title">{{this.localFile.Name}}</div>
-    <a routerLink="/share"><div class="card-button"> <button class="btn-orange w60">Share</button></div></a>
+
+    <div class="card-button"> <a routerLink="/share"><button class="btn-orange w60">Share</button></a></div>
+
 </div>
+<a>{{ userService.currentDomain | currentDomain }}{{ '/v/' + localFile.Token }}</a>

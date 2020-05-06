@@ -1,3 +1,4 @@
+import { UserService } from "./../../services/user.service";
 import { Component, OnInit, Input } from "@angular/core";
 import { FileModel } from "src/app/interfaces/file-interface";
 
@@ -9,7 +10,7 @@ import { FileModel } from "src/app/interfaces/file-interface";
 export class FileCardComponent implements OnInit {
   @Input() localFile: FileModel;
 
-  constructor() {}
+  constructor(public userService: UserService) {}
 
   ngOnInit() {}
 

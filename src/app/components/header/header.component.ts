@@ -2,7 +2,9 @@ import { FilesService } from "src/app/services/files.service";
 import { Router } from "@angular/router";
 import { UserService } from "src/app/services/user.service";
 import { Component, OnInit } from "@angular/core";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { Location } from '@angular/common';
+
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -10,11 +12,13 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 })
 export class HeaderComponent implements OnInit {
   public faLogOut = faSignOutAlt;
+  public faBack = faChevronCircleLeft;
 
   constructor(
     private userService: UserService,
-    private router: Router,
-    private filesService: FilesService
+    public router: Router,
+    private filesService: FilesService,
+    private location: Location
   ) {}
 
   ngOnInit() {}
@@ -23,5 +27,9 @@ export class HeaderComponent implements OnInit {
     this.filesService.stopHearBeat();
     this.userService.userLogOut();
     this.router.navigate(["/login"]);
+  }
+
+  goToPreviousPage(){
+    this.location.back();
   }
 }

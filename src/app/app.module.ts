@@ -1,3 +1,4 @@
+import { PipesModule } from './pipes/pipes.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -33,7 +34,8 @@ import { ShareComponent } from './components/share/share.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    PipesModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

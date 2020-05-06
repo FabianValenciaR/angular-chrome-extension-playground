@@ -71,6 +71,7 @@ export class FilesService {
             this.totalFiles.push(file);
           }
         }
+        console.log(this.totalFiles);
       });
   }
 }
