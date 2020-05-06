@@ -1,3 +1,4 @@
+import { FilesService } from "src/app/services/files.service";
 import { Component, OnInit } from "@angular/core";
 import {
   faEnvelope,
@@ -26,7 +27,7 @@ export class ShareComponent implements OnInit {
   public faShareAlt = faShareAlt;
   public faEnvelopeOpenText = faEnvelopeOpenText;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private filesService: FilesService) {
     this.Emails = new Array();
     this.emailBody = "";
     this.localEmail = "";
@@ -34,6 +35,18 @@ export class ShareComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  getFileValues() {
+    this.filesService
+      .getSelectedFile()
+      .then((res) => {
+        this.newUrlToken = res.Token;
+        this.newFileName = res.Name;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   addEmail(e: any) {
     if (e.keyCode === 13) {
@@ -56,6 +69,8 @@ export class ShareComponent implements OnInit {
   }
 
   async shareFile() {
+    await this.getFileValues();
+
     const objEmail = {
       FileToken: this.newUrlToken,
       ReceiverAddresses: this.Emails,

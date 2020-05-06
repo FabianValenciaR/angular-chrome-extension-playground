@@ -10,7 +10,7 @@ import { environment } from "src/environments/environment";
 export class FilesService {
   public totalFiles: FileModel[] = [];
   private fileServiceHearbeatID: NodeJS.Timer;
-
+  public selectedFile: FileModel = new FileModel();
   constructor(public userService: UserService, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -42,6 +42,14 @@ export class FilesService {
     this.totalFiles = new Array<FileModel>();
   }
 
+  async setSelectedFile(selectedFile: FileModel) {
+    this.selectedFile = selectedFile;
+  }
+
+  async getSelectedFile() {
+    return this.selectedFile;
+  }
+
   async getFiles() {
     const token = await this.userService.getJwtToken();
 
@@ -71,7 +79,6 @@ export class FilesService {
             this.totalFiles.push(file);
           }
         }
-        console.log(this.totalFiles);
       });
   }
 }

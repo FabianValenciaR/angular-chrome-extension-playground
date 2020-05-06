@@ -4,7 +4,8 @@
     </div>
     <div class="card-title">{{this.localFile.Name}}</div>
 
-    <div class="card-button"> <a routerLink="/share"><button class="btn-orange w60">Share</button></a></div>
+    <div class="card-button"><a (click)="this.selectFile(localFile)" routerLink="/share"><button
+                class="btn-orange w60">Share</button></a></div>
 
 </div>
 <a>{{ userService.currentDomain | currentDomain }}{{ '/v/' + localFile.Token }}</a>

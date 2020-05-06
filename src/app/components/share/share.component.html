@@ -1,6 +1,5 @@
 <div class="app-wrapper">
-    <br />
-    <h6 class="text-share"><b>Share presentation via email</b></h6>
+    <h6 class="text-share text-center"><b>Share presentation via email</b></h6>
     <p class="text-share">
         We make it easy to share the presentation with anyone who has an email address.
     </p>
@@ -37,10 +36,9 @@
         </div>
     </div>
     <div class="text-center">
-        <button class="btn btn-orange shareButton btn-share" type="button">
+        <button class="btn btn-orange shareButton btn-share" type="button" (click)="shareFile()">
             SHARE
             <fa-icon [icon]="faShareAlt" size="lg"></fa-icon>
         </button>
     </div>
-    <br />
 </div>
