@@ -14,6 +14,7 @@ import { FileCardComponent } from './components/file-card/file-card.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ShareComponent } from './components/share/share.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FilesContainerComponent,
     FileCardComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ShareComponent
   ],
   imports: [
     BrowserModule,
