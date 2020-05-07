@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { ToastrManager } from "ng6-toastr-notifications";
 
 @Component({
   selector: "app-share",
@@ -31,7 +32,8 @@ export class ShareComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private filesService: FilesService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    public toastr: ToastrManager
   ) {
     this.Emails = new Array();
     this.emailBody = "";
@@ -88,9 +90,8 @@ export class ShareComponent implements OnInit {
 
     let requestUrl = environment.BaseApiUrl + "/ses/sharing";
 
-    this.http
-      .post(requestUrl, JSON.stringify(objEmail), options)
-      .subscribe((data: Array<string>) => {
+    this.http.post(requestUrl, JSON.stringify(objEmail), options).subscribe(
+      (data: Array<string>) => {
         if (data.length === 0) {
           this.Emails = new Array();
           this.localEmail = "";
@@ -103,6 +104,11 @@ export class ShareComponent implements OnInit {
           }
         }
         this.spinner.hide();
-      });
+        this.toastr.successToastr("The file: " + this.newFileName + " was shared successfully!")
+      },
+      (error) => {
+        this.toastr.errorToastr(error.message);
+      }
+    );
   }
 }
