@@ -18,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShareComponent } from './components/share/share.component';
 import { SearchToolComponent } from './components/search-tool/search-tool.component';
 
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SearchToolComponent } from './components/search-tool/search-tool.compon
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    PipesModule
+    PipesModule,
+    NgxSpinnerModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

@@ -24,6 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "amazon-cognito-identity-js": "^4.2.1",
     "aws-sdk": "^2.669.0",
+    "ngx-spinner": "^9.0.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

@@ -1,4 +1,5 @@
 <div class="app-wrapper">
+    <ngx-spinner></ngx-spinner>
     <app-search-tool (receiveTxt2Search)="sendTxt2Search($event)"></app-search-tool>
     <app-files-container [filesToShow]="filesService.totalFiles  | searchFiles: str2Search"></app-files-container>
 </div>

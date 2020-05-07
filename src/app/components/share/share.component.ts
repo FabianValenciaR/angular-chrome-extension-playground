@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from "ngx-spinner";
 import { FilesService } from "src/app/services/files.service";
 import { Component, OnInit } from "@angular/core";
 import {
@@ -27,7 +28,11 @@ export class ShareComponent implements OnInit {
   public faShareAlt = faShareAlt;
   public faEnvelopeOpenText = faEnvelopeOpenText;
 
-  constructor(private http: HttpClient, private filesService: FilesService) {
+  constructor(
+    private http: HttpClient,
+    private filesService: FilesService,
+    private spinner: NgxSpinnerService
+  ) {
     this.Emails = new Array();
     this.emailBody = "";
     this.localEmail = "";
@@ -69,6 +74,7 @@ export class ShareComponent implements OnInit {
   }
 
   async shareFile() {
+    this.spinner.show();
     await this.getFileValues();
 
     const objEmail = {
@@ -96,6 +102,7 @@ export class ShareComponent implements OnInit {
             emailElement.style.color = "red";
           }
         }
+        this.spinner.hide();
       });
   }
 }
