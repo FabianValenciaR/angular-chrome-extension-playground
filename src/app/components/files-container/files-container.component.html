@@ -1,4 +1,12 @@
 <h4 class="text-center mb-3">MY FILES</h4>
-<div *ngFor="let file of this.actualFilesToShow">
-        <app-file-card [localFile]="file"></app-file-card>
+<div *ngIf="!filesService.loaded">
+        Loading Files...
+</div>
+<div *ngIf="filesService.loaded && this.actualFilesToShow.length == 0">
+        There are not any files to show.
+</div>
+<div *ngIf="filesService.loaded && this.actualFilesToShow.length > 0">
+        <div *ngFor="let file of this.actualFilesToShow">
+                <app-file-card [localFile]="file"></app-file-card>
+        </div>
 </div>

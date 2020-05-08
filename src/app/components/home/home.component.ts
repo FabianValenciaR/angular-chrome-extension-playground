@@ -1,4 +1,3 @@
-import { FileModel } from "./../../interfaces/file-interface";
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FilesService } from "src/app/services/files.service";
 
@@ -16,6 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.filesService.loaded = false;
     this.filesService.startHearbeat();
   }
 

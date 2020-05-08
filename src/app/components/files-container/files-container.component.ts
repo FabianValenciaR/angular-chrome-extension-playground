@@ -1,3 +1,4 @@
+import { FilesService } from 'src/app/services/files.service';
 import { Component, OnInit, Input, OnChanges } from "@angular/core";
 import { FileModel } from "src/app/interfaces/file-interface";
 
@@ -10,7 +11,7 @@ export class FilesContainerComponent implements OnInit, OnChanges {
   @Input() filesToShow: Array<FileModel> = new Array<FileModel>();
   public actualFilesToShow = new Array<FileModel>();
 
-  constructor() {}
+  constructor(public filesService: FilesService) {}
 
   ngOnInit() {}
 

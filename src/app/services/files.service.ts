@@ -11,6 +11,8 @@ export class FilesService {
   public totalFiles: FileModel[] = [];
   private fileServiceHearbeatID: NodeJS.Timer;
   public selectedFile: FileModel = new FileModel();
+  public loaded = false;
+
   constructor(public userService: UserService, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -79,6 +81,7 @@ export class FilesService {
             this.totalFiles.push(file);
           }
         }
+        this.loaded = true;
       });
   }
 }

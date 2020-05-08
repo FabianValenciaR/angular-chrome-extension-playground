@@ -3,6 +3,7 @@ import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrManager } from "ng6-toastr-notifications";
+import { FilesService } from "src/app/services/files.service";
 
 @Component({
   selector: "app-login",
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     public router: Router,
     private spinner: NgxSpinnerService,
-    public toastr: ToastrManager
+    private toastr: ToastrManager,
+    private filesService: FilesService
   ) {}
 
   ngOnInit() {}
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   doLogin() {
     this.email = this.email.trim().toLocaleLowerCase();
     if (!this.checkEmail(this.email)) {
-      this.toastr.errorToastr('Valid email address required.');
+      this.toastr.errorToastr("Valid email address required.");
       return;
     }
 
@@ -35,8 +37,11 @@ export class LoginComponent implements OnInit {
       .userLogIn(this.email, this.password)
       .then((response) => {
         this.isLoggedIn = true;
-        this.spinner.hide();
-        this.router.navigate(["/home"]);
+        this.filesService.loaded = false;
+        setTimeout(() => {
+          this.spinner.hide();
+          this.router.navigate(["/home"]);
+        }, 1000);
       })
       .catch((error) => {
         this.spinner.hide();
