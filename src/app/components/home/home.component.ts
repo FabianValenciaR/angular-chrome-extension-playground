@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.filesService.getFiles();
     this.filesService.startHearbeat();
   }
 
