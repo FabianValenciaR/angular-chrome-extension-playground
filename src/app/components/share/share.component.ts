@@ -57,13 +57,20 @@ export class ShareComponent implements OnInit {
 
   addEmail(e: any) {
     if (e.keyCode === 13) {
-      if (this.Emails.length < 15) {
+      if (
+        this.checkEmail(this.localEmail.toLowerCase()) &&
+        !this.findEmail(this.localEmail.toLowerCase()) &&
+        this.Emails.length < 15
+      ) {
         this.Emails.push(this.localEmail.toLowerCase());
         this.localEmail = "";
         this.validationEmail = "";
       }
     } else {
-      if (this.localEmail.length > 0) {
+      if (
+        !this.checkEmail(this.localEmail.toLowerCase()) &&
+        this.localEmail.length > 0
+      ) {
         this.validationEmail = "is-invalid";
       } else {
         this.validationEmail = "";
@@ -76,39 +83,63 @@ export class ShareComponent implements OnInit {
   }
 
   async shareFile() {
+    if (
+      this.localEmail.length > 0 &&
+      this.checkEmail(this.localEmail) &&
+      !this.findEmail(this.localEmail) &&
+      this.Emails.length < 15
+    ) {
+      this.Emails.push(this.localEmail);
+      this.localEmail = "";
+    }
+
     this.spinner.show();
     await this.getFileValues();
 
-    const objEmail = {
-      FileToken: this.newUrlToken,
-      ReceiverAddresses: this.Emails,
-      EmailBody: this.emailBody.replace(/\n/g, "<br>").concat("<br>"),
-      FileName: this.newFileName,
-    };
+    if (this.Emails.length > 0) {
+      const objEmail = {
+        FileToken: this.newUrlToken,
+        ReceiverAddresses: this.Emails,
+        EmailBody: this.emailBody.replace(/\n/g, "<br>").concat("<br>"),
+        FileName: this.newFileName,
+      };
 
-    let options = {};
+      let options = {};
 
-    let requestUrl = environment.BaseApiUrl + "/ses/sharing";
+      let requestUrl = environment.BaseApiUrl + "/ses/sharing";
 
-    this.http.post(requestUrl, JSON.stringify(objEmail), options).subscribe(
-      (data: Array<string>) => {
-        if (data.length === 0) {
-          this.Emails = new Array();
-          this.localEmail = "";
-          this.emailBody = "";
-        } else {
-          for (const badEmail of data) {
-            const emailId = this.Emails.findIndex((x) => x === badEmail);
-            const emailElement = document.getElementById("email" + emailId);
-            emailElement.style.color = "red";
+      this.http.post(requestUrl, JSON.stringify(objEmail), options).subscribe(
+        (data: Array<string>) => {
+          if (data.length === 0) {
+            this.Emails = new Array();
+            this.localEmail = "";
+            this.emailBody = "";
+          } else {
+            for (const badEmail of data) {
+              const emailId = this.Emails.findIndex((x) => x === badEmail);
+              const emailElement = document.getElementById("email" + emailId);
+              emailElement.style.color = "red";
+            }
           }
+          this.spinner.hide();
+          this.toastr.successToastr(
+            "The file: " + this.newFileName + " was shared successfully!"
+          );
+        },
+        (error) => {
+          this.toastr.errorToastr("Something went wrong! Please try again.");
         }
-        this.spinner.hide();
-        this.toastr.successToastr("The file: " + this.newFileName + " was shared successfully!")
-      },
-      (error) => {
-        this.toastr.errorToastr(error.message);
-      }
-    );
+      );
+    }
+  }
+
+  checkEmail(strEmail: string) {
+    // tslint:disable-next-line: max-line-length
+    const regex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+    return regex.test(strEmail) && regex.exec(strEmail)[0] === strEmail;
+  }
+
+  findEmail(strEmail: string) {
+    return this.Emails.includes(strEmail);
   }
 }
