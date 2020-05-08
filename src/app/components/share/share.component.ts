@@ -52,6 +52,7 @@ export class ShareComponent implements OnInit {
       })
       .catch((error) => {
         console.error(error);
+        this.toastr.errorToastr("Something went wrong! Please try again.");
       });
   }
 
@@ -93,7 +94,6 @@ export class ShareComponent implements OnInit {
       this.localEmail = "";
     }
 
-    this.spinner.show();
     await this.getFileValues();
 
     if (this.Emails.length > 0) {
@@ -107,6 +107,8 @@ export class ShareComponent implements OnInit {
       let options = {};
 
       let requestUrl = environment.BaseApiUrl + "/ses/sharing";
+
+      this.spinner.show();
 
       this.http.post(requestUrl, JSON.stringify(objEmail), options).subscribe(
         (data: Array<string>) => {
@@ -130,6 +132,8 @@ export class ShareComponent implements OnInit {
           this.toastr.errorToastr("Something went wrong! Please try again.");
         }
       );
+    } else {
+      this.toastr.errorToastr("Please add a valid email address");
     }
   }
 
