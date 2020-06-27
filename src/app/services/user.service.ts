@@ -32,7 +32,6 @@ export class UserService {
     this.isUserLogged().then((isIt) => {
       this.userLoaded = isIt;
       if (isIt) {
-        console.log("Logged!");
       } else this.refreshUserSession().catch(() => {});
     });
 

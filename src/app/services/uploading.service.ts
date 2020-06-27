@@ -97,23 +97,15 @@ export class UploadingService {
         },
         function (err, data) {
           if (err) {
-            console.log('uploading.service.ts', 'uploadSingleFile', err);
             // tslint:disable-next-line: no-string-literal
             file['status'] = 'Error';
             reject(err);
           } else {
-            // this.dargdropToast.info(`Uploaded file: "${file.name}"`);
             // tslint:disable-next-line: no-string-literal
-            // file['status'] = 'Uploaded';
-            // this.uploadingModal.completeProgressBar(index);
             resolve(data);
           }
         }.bind(this)
       );
-      // .on('httpUploadProgress', (evt: any) => {
-      //   const uploaded = Math.round((evt.loaded / evt.total) * 100);
-      //   this.uploadingModal.updateProgressBar(index, uploaded);
-      // });
     });
   }
 }

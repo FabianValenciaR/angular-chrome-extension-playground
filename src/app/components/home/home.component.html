@@ -1,4 +1,5 @@
 <div class="app-wrapper">
+  <ngx-spinner></ngx-spinner>
   <div class="btn btn-orange mb-1" (click)="selectFiles()">UPLOAD</div>
   <input id="inputFiles" type="file" name="myFile" multiple hidden accept="{{ allowFiles }}"
     (change)="selectedFiles($event)" />

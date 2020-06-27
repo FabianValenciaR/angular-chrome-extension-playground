@@ -7,6 +7,7 @@ import { UserService } from "src/app/services/user.service";
 import { environment } from "src/environments/environment";
 import { PaymentService } from "src/app/services/payment.service";
 import { ToastrManager } from "ng6-toastr-notifications";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-home",
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
     private uploadingService: UploadingService,
     private userService: UserService,
     private paymentService: PaymentService,
-    public toastr: ToastrManager
+    public toastr: ToastrManager,
+    private spinner: NgxSpinnerService
   ) {
     this.str2Search = "";
   }
@@ -45,7 +47,6 @@ export class HomeComponent implements OnInit {
   }
 
   selectedFiles(e: any) {
-    debugger;
     // tslint:disable-next-line: no-string-literal
     const sFiles: FileList = e["currentTarget"]["files"];
     if (sFiles.length === 0) {
@@ -57,7 +58,6 @@ export class HomeComponent implements OnInit {
       for (let f of Array.from(sFiles)) {
         this.uploadingService.panicIfInvalidSlydeckFile(f);
       }
-
       this.importSelectedFiles(Array.from(sFiles));
     } catch (error) {
       // @ts-ignore
@@ -78,6 +78,9 @@ export class HomeComponent implements OnInit {
       this.filesService.totalFiles.length + sFiles.length >
       this.userService.currentUser.PricingPlan.PricingPlanRestrictions.FileLimit
     ) {
+      this.toastr.errorToastr(
+        `Your current plan only allows up to: ${this.userService.currentUser.PricingPlan.PricingPlanRestrictions.FileLimit} files.`
+      );
     } else {
       setTimeout(() => {
         this.uploadFiles();
@@ -104,6 +107,7 @@ export class HomeComponent implements OnInit {
    */
   async uploadingFiles() {
     // allow a maximum of 4 files to be uploaded at the same time
+
     let uploaderPool = new UploaderPool(4);
 
     for (const file of this.uploadingService.slydeckFiles) {
@@ -114,6 +118,8 @@ export class HomeComponent implements OnInit {
   }
 
   async uploadSingleFile(file): Promise<void> {
+    this.spinner.show();
+
     const fileNameTokens = file.name.split(".");
     const fileFormat = fileNameTokens[fileNameTokens.length - 1];
     const index = this.uploadingService.slydeckFiles.indexOf(file);
@@ -160,10 +166,15 @@ export class HomeComponent implements OnInit {
           const uploaded = Math.round((evt.loaded / evt.total) * 100);
         })
         .promise();
-      this.toastr.successToastr(`Uploaded file: "${file.name}"`);
+
+      setTimeout(() => {
+        this.filesService.getFiles().then(() => {
+          this.spinner.hide();
+          this.toastr.successToastr(`Uploaded file: "${file.name}"`);
+        });
+      }, 3000);
       // tslint:disable-next-line: no-string-literal
       file["status"] = "Uploaded";
-      // this.uploadingModal.completeProgressBar(index);
 
       const uploadedFileKey = uploadResults.Key;
       const keyPartFileName = uploadedFileKey.substring(
@@ -171,14 +182,16 @@ export class HomeComponent implements OnInit {
       );
 
       try {
-        // await this.filesService.getFiles();
         this.uploadingService.filesReady++;
       } catch (error) {
         // we either exceeded the maximum amount of retries or an unknown error ocurred while
         // obtaining info for the file
       }
     } catch (err) {
-      this.toastr.errorToastr(`There was an error uploading the file "${file.name}"`);
+      this.spinner.hide();
+      this.toastr.errorToastr(
+        `There was an error uploading the file "${file.name}"`
+      );
 
       console.error(err);
       // tslint:disable-next-line: no-string-literal
