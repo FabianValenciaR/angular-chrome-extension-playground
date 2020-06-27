@@ -1,4 +1,7 @@
 <div class="app-wrapper">
-    <app-search-tool (receiveTxt2Search)="sendTxt2Search($event)"></app-search-tool>
-    <app-files-container [filesToShow]="filesService.totalFiles  | searchFiles: str2Search"></app-files-container>
+  <div class="btn btn-orange mb-1" (click)="selectFiles()">UPLOAD</div>
+  <input id="inputFiles" type="file" name="myFile" multiple hidden accept="{{ allowFiles }}"
+    (change)="selectedFiles($event)" />
+  <app-search-tool (receiveTxt2Search)="sendTxt2Search($event)"></app-search-tool>
+  <app-files-container [filesToShow]="filesService.totalFiles  | searchFiles: str2Search"></app-files-container>
 </div>

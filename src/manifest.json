@@ -1,11 +1,13 @@
 {
   "name": "Slydeck App",
-  "version": "1.0",
+  "version": "1.1.1",
   "description": "Proposal tracking app!",
   "manifest_version": 2,
-  "permissions": [
-    "activeTab"
-  ],
+  "icons": {
+    "16": "./assets/fox-icon-48x48.jpg",
+    "48": "./assets/fox-icon-48x48.jpg",
+    "128": "./assets/fox-icon-128x128.jpg"
+  },
   "browser_action": {
     "default_popup": "index.html"
   }

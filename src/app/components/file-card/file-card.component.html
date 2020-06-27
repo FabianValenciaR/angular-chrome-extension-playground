@@ -1,11 +1,17 @@
 <div class="card file-card">
-    <div class="card-icon">
-        <img src="./assets/pdf-icon.png" height="50px" />
-    </div>
-    <div class="card-title">{{this.localFile.Name}}</div>
+  <div class="card-icon">
+    <img src="./assets/pdf-icon.png" height="50px" />
+  </div>
+  <div class="card-title">{{this.localFile.Name}}</div>
 
-    <div class="card-button"><a (click)="this.selectFile(localFile)" routerLink="/share"><button
-                class="btn-orange w60">Share</button></a></div>
+  <div class="card-button">
+    <a (click)="this.selectFile(localFile)" routerLink="/share">
+      <button class="btn-orange">Share</button>
+    </a>
+    <a (click)="this.copyClipboard(localFile)">
+      <button class="btn-orange">Copy Link</button>
+    </a>
+  </div>
 
 </div>
 <!-- <a>{{ userService.currentDomain | currentDomain }}{{ '/v/' + localFile.Token }}</a> -->

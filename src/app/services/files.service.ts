@@ -66,17 +66,18 @@ export class FilesService {
       .subscribe((data: Array<any>) => {
         // @ts-ignore
         // tslint:disable-next-line: prefer-for-of
-        if (data) {
+        if (data['data']) {
+
           this.totalFiles = [];
-          for (let i = 0; i < data.length; i++) {
+          for (let i = 0; i < data['data'].length; i++) {
             // Validate if this item already exists in the array, otherwise push it
             const file = new FileModel();
-            file.Key = data[i].Key;
-            file.Name = data[i].Key.split("/")[1];
-            file.Token = data[i].AssociatedTokens[0];
-            file.CreatedDate = new Date(data[i].ProcessedDate).toUTCString();
-            file.Owner = data[i].UploaderCognitoId;
-            file.Type = data[i].FileFormat;
+            file.Key = data['data'][i].Key;
+            file.Name = data['data'][i].FileName;
+            file.Token = data['data'][i].AssociatedTokens[0];
+            file.CreatedDate = new Date(data['data'][i].ProcessedDate).toUTCString();
+            file.Owner = data['data'][i].UploaderCognitoId;
+            file.Type = data['data'][i].FileFormat;
 
             this.totalFiles.push(file);
           }

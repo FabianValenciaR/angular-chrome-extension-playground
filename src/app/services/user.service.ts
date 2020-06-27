@@ -3,6 +3,7 @@ import * as AWS_Auth from "amazon-cognito-identity-js";
 import { environment } from "src/environments/environment";
 import { UserModel } from "../models/user-model";
 import * as AWS from "aws-sdk";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -17,7 +18,7 @@ export class UserService {
   private userLoaded = false;
   public currentDomain: string;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.currentUser = new UserModel();
 
     this.userPool = new AWS_Auth.CognitoUserPool({
@@ -37,8 +38,10 @@ export class UserService {
 
     //Set the file base domain if the user loaded
     this.waitUserLoad().then(() => {
-      // wait for user to load then set file base domain
-      this.SetFileBaseDomain();
+      this.loadUserSettings().then(() => {
+        // wait for user to load then set file base domain
+        this.SetFileBaseDomain();
+      });
     });
   }
 
@@ -122,7 +125,6 @@ export class UserService {
     });
   }
 
-  
   /**
    *Return a flag if the user is logged
    *
@@ -284,10 +286,7 @@ export class UserService {
   }
 
   SetFileBaseDomain() {
-    if (
-      this.currentUser.UserSettings.BrandedLinks &&
-      environment.StageName !== "Staging"
-    ) {
+    if (this.currentUser.UserSettings.BrandedLinks) {
       let currentHostName = new URL(window.location.href).host;
       let separatedHostName: string[] = currentHostName.split(".");
       const currentProtocol = new URL(window.location.href).protocol;
@@ -295,10 +294,10 @@ export class UserService {
         .replace(/\./g, "-")
         .toLowerCase();
 
-      const brandedHostName = `${currentProtocol}//${companyName}.${separatedHostName[1]}.${separatedHostName[2]}`;
+      const brandedHostName = `https://${companyName}.slydeck.io`;
       this.currentDomain = brandedHostName;
     } else {
-      this.currentDomain = new URL(window.location.href).origin;
+      this.currentDomain = `https://app.slydeck.io`;
     }
   }
 
@@ -312,5 +311,50 @@ export class UserService {
 
   private clearUserCookies() {
     localStorage.removeItem(this.cookie_currentUser_name);
+  }
+
+  /**
+   * Loads user settings for `this.currentUser`
+   */
+  public async loadUserSettings() {
+    const options = {
+      headers: new HttpHeaders().append(
+        "Authorization",
+        await this.getJwtToken()
+      ),
+    };
+
+    try {
+      let userSettings: any = await this.httpClient
+        .get(environment.BaseApiUrl + "/user/settings", options)
+        .toPromise();
+
+      this.currentUser.UserSettings = userSettings;
+
+      localStorage.setItem(
+        this.cookie_currentUser_name,
+        JSON.stringify(this.currentUser)
+      );
+    } catch (error) {}
+
+    this.userLoaded = true;
+  }
+
+  /**
+   * Gets the newest credentials from AWS.config.credentials
+   */
+  async getAWSCredentials(): Promise<AWS.Credentials> {
+    return await new Promise(res => {
+      // @ts-ignore
+      AWS.config.credentials.get(() => {
+        res(
+          new AWS.Credentials({
+            accessKeyId: AWS.config.credentials.accessKeyId,
+            secretAccessKey: AWS.config.credentials.secretAccessKey,
+            sessionToken: AWS.config.credentials.sessionToken
+          })
+        );
+      });
+    });
   }
 }
