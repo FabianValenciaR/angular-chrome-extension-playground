@@ -64,22 +64,27 @@ export class FilesService {
     this.http
       .get(environment.BaseApiUrl + "files", options)
       .subscribe((data: Array<any>) => {
+
+        let unorderedFiles = data['data'].sort(function(a,b){
+          return new Date(b.ProcessedDate).getTime() - new Date(a.ProcessedDate).getTime();
+        });
+
         // @ts-ignore
         // tslint:disable-next-line: prefer-for-of
-        if (data['data']) {
+        if (unorderedFiles) {
 
           this.totalFiles = [];
-          for (let i = 0; i < data['data'].length; i++) {
+          for (let i = 0; i < unorderedFiles.length; i++) {
             // Validate if this item already exists in the array, otherwise push it
             const file = new FileModel();
-            file.Key = data['data'][i].Key;
-            file.Name = data['data'][i].FileName;
-            file.Token = data['data'][i].AssociatedTokens[0];
-            file.CreatedDate = new Date(data['data'][i].ProcessedDate).toUTCString();
-            file.Owner = data['data'][i].UploaderCognitoId;
-            file.Type = data['data'][i].FileFormat;
+            file.Key = unorderedFiles[i].Key;
+            file.Name = unorderedFiles[i].FileName;
+            file.Token = unorderedFiles[i].AssociatedTokens[0];
+            file.CreatedDate = new Date(unorderedFiles[i].ProcessedDate).toUTCString();
+            file.Owner = unorderedFiles[i].UploaderCognitoId;
+            file.Type = unorderedFiles[i].FileFormat;
 
-            this.totalFiles.push(file);
+            this.totalFiles.unshift(file);
           }
         }
         this.loaded = true;
