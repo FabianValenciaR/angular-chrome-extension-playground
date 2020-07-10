@@ -1,5 +1,5 @@
 <div class="header-wrapper">
-    <a *ngIf="this.router.url == '/share'" class="btn btn-text-orange" (click)="goToPreviousPage()">
+    <a *ngIf="(this.router.url == '/share') || (this.router.url == '/copy-url')" class="btn btn-text-orange" (click)="goToPreviousPage()">
         <fa-icon [icon]="faBack" class="btn-icon mr-2"></fa-icon>Back
     </a>
     <a *ngIf="this.router.url != '/login'" class="btn btn-text-orange ml-auto" (click)="logOut()">

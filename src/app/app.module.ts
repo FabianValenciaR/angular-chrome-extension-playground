@@ -21,6 +21,7 @@ import { SearchToolComponent } from "./components/search-tool/search-tool.compon
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ng6-toastr-notifications";
+import { CopyCustomUrlComponent } from './components/copy-custom-url/copy-custom-url.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ToastrModule } from "ng6-toastr-notifications";
     FooterComponent,
     ShareComponent,
     SearchToolComponent,
+    CopyCustomUrlComponent,
   ],
   imports: [
     BrowserModule,

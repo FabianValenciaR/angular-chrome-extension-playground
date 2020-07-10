@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
       .catch((error) => {
         this.spinner.hide();
         this.isLoggedIn = false;
-        console.error(error);
         this.toastr.errorToastr(error.message);
       });
   }

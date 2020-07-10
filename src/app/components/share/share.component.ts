@@ -6,6 +6,7 @@ import {
   faShareAlt,
   faTimes,
   faEnvelopeOpenText,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -20,11 +21,13 @@ export class ShareComponent implements OnInit {
   public Emails: string[];
   public emailBody: string;
   public localEmail: string;
+  public aliasGroup: string;
   public validationEmail: string;
   private newUrlToken: string;
   private newFileName: string;
 
   public faEnvelope = faEnvelope;
+  public faUser = faUser;
   public faTimes = faTimes;
   public faShareAlt = faShareAlt;
   public faEnvelopeOpenText = faEnvelopeOpenText;
@@ -51,7 +54,6 @@ export class ShareComponent implements OnInit {
         this.newFileName = res.Name;
       })
       .catch((error) => {
-        console.error(error);
         this.toastr.errorToastr("Something went wrong! Please try again.");
       });
   }
@@ -102,6 +104,7 @@ export class ShareComponent implements OnInit {
         ReceiverAddresses: this.Emails,
         EmailBody: this.emailBody.replace(/\n/g, "<br>").concat("<br>"),
         FileName: this.newFileName,
+        ReceiverGroupAlias: this.aliasGroup
       };
 
       let options = {};

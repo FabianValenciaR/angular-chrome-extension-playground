@@ -193,7 +193,6 @@ export class HomeComponent implements OnInit {
         `There was an error uploading the file "${file.name}"`
       );
 
-      console.error(err);
       // tslint:disable-next-line: no-string-literal
       file["status"] = "Error";
     }
