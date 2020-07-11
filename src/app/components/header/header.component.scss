@@ -4,7 +4,9 @@
 }
 
 .header-wrapper {
+    height: 50px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 3px solid #efefef;
 }

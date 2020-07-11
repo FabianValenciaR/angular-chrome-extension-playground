@@ -3,6 +3,7 @@ import { UserService } from "./../../services/user.service";
 import { Component, OnInit, Input } from "@angular/core";
 import { FileModel } from "src/app/interfaces/file-interface";
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { faShare, faShareAlt, faCopy } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "app-file-card",
@@ -11,6 +12,9 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 })
 export class FileCardComponent implements OnInit {
   @Input() localFile: FileModel;
+  public formatedDate: string;
+  public faShare = faShareAlt;
+  public faCopy = faCopy;
 
   constructor(
     public userService: UserService,
@@ -22,6 +26,10 @@ export class FileCardComponent implements OnInit {
 
   getSession() {
     let cognitoSession = localStorage.getItem("sd-session");
+  }
+
+  ngOnChanges(){
+    this.formatedDate = new Date(this.localFile.CreatedDate).toISOString().slice(0,10);
   }
 
   copyClipboard(file: FileModel){

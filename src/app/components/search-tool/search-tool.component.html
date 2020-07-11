@@ -1,11 +1,11 @@
 <form class="form-inline mr-sm-2 my-2 my-lg-0">
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text input-group-text-inverse" id="basic-addon1">
-                <fa-icon [icon]="faSearch"></fa-icon>
-            </span>
-        </div>
-        <input [(ngModel)]="str2Search" id="txtSearch" name="txtSearch" class="form-control input-search-inverse"
-            type="search" (keyup)="sendTxt2Search()" (blur)="sendTxt2Search()" (search)="sendTxt2Search()" />
+  <div class="input-group">
+    <input style="border-right: none;" [(ngModel)]="str2Search" id="txtSearch" name="txtSearch" class="form-control input-search-inverse"
+      type="search" (keyup)="sendTxt2Search()" (blur)="sendTxt2Search()" (search)="sendTxt2Search()" />
+    <div class="input-group-prepend">
+      <span style="border-left: none; background-color: #ffffff;" class="input-group-text input-group-text-inverse" id="basic-addon1">
+        <fa-icon [icon]="faSearch"></fa-icon>
+      </span>
     </div>
+  </div>
 </form>

@@ -1,8 +1,14 @@
 <div class="app-wrapper">
   <ngx-spinner></ngx-spinner>
-  <div class="btn btn-orange mb-1" (click)="selectFiles()">UPLOAD</div>
-  <input id="inputFiles" type="file" name="myFile" multiple hidden accept="{{ allowFiles }}"
-    (change)="selectedFiles($event)" />
-  <app-search-tool (receiveTxt2Search)="sendTxt2Search($event)"></app-search-tool>
+  <div class="row d-flex align-items-center">
+    <div class="col-8">
+      <app-search-tool (receiveTxt2Search)="sendTxt2Search($event)"></app-search-tool>
+    </div>
+    <div class="col-4">
+      <div class="btn btn-orange" (click)="selectFiles()">UPLOAD</div>
+      <input id="inputFiles" type="file" name="myFile" multiple hidden accept="{{ allowFiles }}"
+        (change)="selectedFiles($event)" />
+    </div>
+  </div>
   <app-files-container [filesToShow]="filesService.totalFiles  | searchFiles: str2Search"></app-files-container>
 </div>
