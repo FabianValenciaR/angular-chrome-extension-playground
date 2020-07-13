@@ -5,9 +5,10 @@
     <p>
       Who are you sharing this with?
     </p>
+    <p>File Name: <a target="_blank" id="CustomLinkUrl" [href]="this.generatedLink">{{this.newFileName}}</a></p>
     <div class="input-group form-group mt-4">
       <p class="w-100">Name *</p>
-      <input [(ngModel)]="aliasGroup" name="txtEmail" type="text" class="form-control input-form"
+      <input (keyup)="buildUrl()" [(ngModel)]="aliasGroup" name="txtEmail" type="text" class="form-control input-form"
         placeholder="Type name..." style="font-size: smaller;"/>
       <div class="input-group-prepend">
         <span class="input-group-text" style="font-size: smaller;">
@@ -17,7 +18,7 @@
     </div>
     <div class="input-group form-group mt-3 mb-5">
       <p class="w-100">Email</p>
-      <input [(ngModel)]="localEmail" name="txtAlias" type="text" email class="form-control input-form"
+      <input (keyup)="buildUrl()" [(ngModel)]="localEmail" name="txtAlias" type="text" email class="form-control input-form"
         placeholder="Type E-mail..." style="font-size: smaller;" (keyup)="validateEmail()"/>
       <div class="input-group-prepend">
         <span class="input-group-text" style="font-size: smaller;">
