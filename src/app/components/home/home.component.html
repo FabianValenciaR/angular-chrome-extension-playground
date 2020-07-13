@@ -5,7 +5,7 @@
       <app-search-tool (receiveTxt2Search)="sendTxt2Search($event)"></app-search-tool>
     </div>
     <div class="col-4">
-      <div class="btn btn-orange" (click)="selectFiles()">UPLOAD</div>
+      <button class="btn btn-orange" (click)="selectFiles()">UPLOAD</button>
       <input id="inputFiles" type="file" name="myFile" multiple hidden accept="{{ allowFiles }}"
         (change)="selectedFiles($event)" />
     </div>

@@ -1,12 +1,12 @@
 <div class="header-wrapper">
-  <a href="https://app.slydeck.io">
-    <img src="./assets/img/SLYDECK-logo.png" alt="" />
+  <a class="logo-wrapper" href="https://app.slydeck.io">
+    <img src="./assets/Fox-Icon.png" alt="" />
   </a>
-  <a *ngIf="(this.router.url == '/share') || (this.router.url == '/copy-url')" class="btn btn-text-orange"
+  <a *ngIf="(this.router.url == '/share') || (this.router.url == '/copy-url')" class="btn btn-text-orange p-0"
     (click)="goToPreviousPage()">
     <fa-icon [icon]="faBack" class="btn-icon mr-2"></fa-icon>Back
   </a>
-  <a *ngIf="this.router.url != '/login'" class="btn btn-text-orange ml-auto" (click)="logOut()">
+  <a *ngIf="this.router.url != '/login'" class="btn-log-out ml-auto" (click)="logOut()">
     <fa-icon [icon]="faLogOut" class="btn-icon"></fa-icon>
     Log out
   </a>

@@ -2,7 +2,7 @@ import { FilesService } from "src/app/services/files.service";
 import { Router } from "@angular/router";
 import { UserService } from "src/app/services/user.service";
 import { Component, OnInit } from "@angular/core";
-import { faSignOutAlt, faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faChevronCircleLeft, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Location } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
   public faLogOut = faSignOutAlt;
-  public faBack = faChevronCircleLeft;
+  public faBack = faArrowLeft;
 
   constructor(
     private userService: UserService,

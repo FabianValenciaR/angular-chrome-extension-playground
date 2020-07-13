@@ -1,12 +1,27 @@
 .btn-text-orange {
-    color: #f47c26 !important;
-    cursor: pointer;
+  color: #f47c26 !important;
+  cursor: pointer;
 }
 
 .header-wrapper {
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 3px solid #efefef;
+  margin: 0px 15px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #efefef;
+}
+
+.logo-wrapper {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  img {
+    width: 70px;
+  }
+}
+
+.btn-log-out {
+  color: #e73c35 !important;
+  cursor: pointer;
 }

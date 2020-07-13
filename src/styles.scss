@@ -13,6 +13,21 @@ h6 {
   color: #717171;
 }
 
+button:hover {
+  border-radius: 1em !important;
+  transition: all 0.3s ease 0s !important;
+}
+
+button:focus {
+  outline: 0 !important;
+}
+
+input:focus{
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
 .app-wrapper {
   padding: 2%;
   width: 400px;
@@ -41,4 +56,15 @@ h6 {
 
 .w70 {
   width: 70%;
+}
+
+.input-group-prepend {
+  span {
+    border-left: none;
+    background-color: #ffffff;
+  }
+}
+
+.input-form{
+  border-right: none;
 }
