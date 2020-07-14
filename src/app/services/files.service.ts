@@ -84,7 +84,7 @@ export class FilesService {
             file.Owner = unorderedFiles[i].UploaderCognitoId;
             file.Type = unorderedFiles[i].FileFormat;
 
-            this.totalFiles.unshift(file);
+            this.totalFiles.push(file);
           }
         }
         this.loaded = true;
