@@ -1,12 +1,13 @@
 {
   "name": "Slydeck App",
   "version": "1.2.0",
-  "description": "Proposal tracking app!",
+  "description": "Slydeck.io is a proposal/document tracking service offered to Sellers and Agents.",
   "manifest_version": 2,
+  "short_name": "Slydeck",
   "icons": {
-    "16": "./assets/fox-icon-48x48.jpg",
-    "48": "./assets/fox-icon-48x48.jpg",
-    "128": "./assets/fox-icon-128x128.jpg"
+    "16": "assets/fox-icon-16x16.png",
+    "48": "assets/fox-icon-48x48.png",
+    "128": "assets/fox-icon-128x128.png"
   },
   "browser_action": {
     "default_popup": "index.html"

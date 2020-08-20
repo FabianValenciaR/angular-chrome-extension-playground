@@ -8,9 +8,10 @@ import {
   faEnvelopeOpenText,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { ToastrManager } from "ng6-toastr-notifications";
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: "app-share",
@@ -36,7 +37,8 @@ export class ShareComponent implements OnInit {
     private http: HttpClient,
     private filesService: FilesService,
     private spinner: NgxSpinnerService,
-    public toastr: ToastrManager
+    public toastr: ToastrManager,
+    public userService: UserService
   ) {
     this.Emails = new Array();
     this.emailBody = "";
@@ -99,17 +101,21 @@ export class ShareComponent implements OnInit {
     await this.getFileValues();
 
     if (this.Emails.length > 0) {
+
       const objEmail = {
         FileToken: this.newUrlToken,
         ReceiverAddresses: this.Emails,
-        EmailBody: this.emailBody.replace(/\n/g, "<br>").concat("<br>"),
+        EmailBody: this.emailBody.replace(/\n/g, '<br>').concat('<br>'),
         FileName: this.newFileName,
+        SenderAddress: this.userService.currentUser.Email,
         ReceiverGroupAlias: this.aliasGroup
       };
 
-      let options = {};
+      let options = {
+        headers: new HttpHeaders().append('Authorization', await this.userService.getJwtToken())
+      };
 
-      let requestUrl = environment.BaseApiUrl + "/ses/sharing";
+      let requestUrl = environment.BaseApiUrl + "/ses/auth/sharing";
 
       this.spinner.show();
 
