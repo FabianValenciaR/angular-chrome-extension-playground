@@ -1,6 +1,6 @@
 {
   "name": "Slydeck App",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Slydeck.io is a proposal/document tracking service offered to Sellers and Agents.",
   "manifest_version": 2,
   "short_name": "Slydeck",
