@@ -4,8 +4,6 @@
     <h5 class="text-center">Share File Via Slydeck</h5>
     <hr>
     <p>
-      We make it easy to share a file.</p>
-    <p>
       You can add up to 15 emails per share.
     </p>
     <div class="input-group form-group mt-3">
@@ -29,7 +27,7 @@
         </span>
       </div>
     </div>
-    <ul *ngIf="Emails.length" class="list-group list-group-flush">
+    <ul *ngIf="Emails.length" class="list-group list-group-flush email-list">
       <li *ngFor="let email of Emails; let i = index" id="email{{ i }}" class="list-group-item list-group-item-light">
         {{ email }}
         <span (click)="removeEmail(i)" style="float: right; cursor: pointer;">
@@ -39,7 +37,7 @@
     </ul>
     <br />
     <div class="input-group form-group mb-4">
-      <textarea [(ngModel)]="emailBody" name="txtEmailBody" class="form-control input-form" cols="45" rows="5"
+      <textarea [(ngModel)]="emailBody" name="txtEmailBody" class="form-control input-form" cols="45" rows="3"
         placeholder="Type sharing file email text here..."></textarea>
       <div class="input-group-prepend">
         <span class="input-group-text">
