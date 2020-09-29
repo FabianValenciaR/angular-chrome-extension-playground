@@ -2,7 +2,7 @@
   <a class="logo-wrapper" href="https://app.slydeck.io">
     <img src="./assets/Fox-Icon.png" alt="" />
   </a>
-  <a *ngIf="(this.router.url == '/share') || (this.router.url == '/copy-url')" class="btn btn-text-orange p-0"
+  <a *ngIf="(this.router.url == '/share') || (this.router.url == '/copy-url') || (this.router.url == '/copy-collection-url') || (this.router.url == '/share-collection')" class="btn btn-text-orange p-0"
     (click)="goToPreviousPage()">
     <fa-icon [icon]="faBack" class="btn-icon mr-2"></fa-icon>Back
   </a>

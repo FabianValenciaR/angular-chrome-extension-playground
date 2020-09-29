@@ -15,6 +15,7 @@ export class CollectionsService {
   public actualCollectionsToShow: Collections[] = new Array<Collections>();
   private collectionServiceHearbeatID: NodeJS.Timer;
   private searchCollectionsPipe = new SearchCollectionsPipe();
+  public selectedCollection: Collections = new Collections();
 
   constructor(
     private httpClient: HttpClient,
@@ -264,5 +265,13 @@ export class CollectionsService {
 
   public filterActualFilesToShow(stringSearch: string){
     this.actualCollectionsToShow = this.searchCollectionsPipe.transform(this.totalCollections, stringSearch);
+  }
+
+  async setSelectedCollection(selectedCollection: Collections) {
+    this.selectedCollection = selectedCollection;
+  }
+
+  async getSelectedCollection() {
+    return this.selectedCollection;
   }
 }

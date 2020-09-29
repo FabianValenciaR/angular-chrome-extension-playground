@@ -8,8 +8,8 @@
   </div>
 
   <div class="card-button">
-    <a class="mr-3" routerLink="/copy-url">
-      <button class="copy-button">
+    <a class="mr-3" routerLink="/copy-collection-url">
+      <button (click)="this.selectCollection(localCollection)" class="copy-button">
         <svg
           style="width: 23px"
           xmlns="http://www.w3.org/2000/svg"
@@ -56,8 +56,8 @@
         </svg>
       </button>
     </a>
-    <a class="mr-2" routerLink="/share">
-      <button class="share-button">
+    <a class="mr-2" routerLink="/share-collection">
+      <button (click)="this.selectCollection(localCollection)" class="share-button">
         <fa-icon
           style="color: #ffffff; font-size: 25px"
           [icon]="faShare"

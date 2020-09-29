@@ -1,0 +1,55 @@
+<ngx-spinner></ngx-spinner>
+<div class="app-wrapper">
+  <div class="m-2">
+    <h5 class="text-center">Share Collection Via Slydeck</h5>
+    <hr>
+    <p>
+      You can add up to 15 emails per share.
+    </p>
+    <div class="input-group form-group mt-3">
+      <p class="w-100">Email *</p>
+      <input [(ngModel)]="localEmail" name="txtEmail" type="text" email
+        class="form-control input-form {{ validationEmail }}" placeholder="Email" style="font-size: smaller;"
+        (keyup)="addEmail($event)" />
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="font-size: smaller;">
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+        </span>
+      </div>
+    </div>
+    <div class="input-group form-group mt-3">
+      <p class="w-100">Name</p>
+      <input [(ngModel)]="aliasGroup" name="txtAlias" type="text" email class="form-control input-form"
+        placeholder="Optional Group Name" style="font-size: smaller;" />
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="font-size: smaller;">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </span>
+      </div>
+    </div>
+    <ul *ngIf="Emails.length" class="list-group list-group-flush email-list">
+      <li *ngFor="let email of Emails; let i = index" id="email{{ i }}" class="list-group-item list-group-item-light">
+        {{ email }}
+        <span (click)="removeEmail(i)" style="float: right; cursor: pointer;">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </span>
+      </li>
+    </ul>
+    <br />
+    <div class="input-group form-group mb-4">
+      <textarea [(ngModel)]="emailBody" name="txtEmailBody" class="form-control input-form" cols="45" rows="3"
+        placeholder="Type sharing collection email text here..."></textarea>
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <fa-icon [icon]="faEnvelopeOpenText"></fa-icon>
+        </span>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-success w-100" type="button" (click)="shareFile()">
+        SHARE
+      </button>
+    </div>
+  </div>
+
+</div>

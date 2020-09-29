@@ -24,6 +24,8 @@ import { ToastrModule } from "ng6-toastr-notifications";
 import { CopyCustomUrlComponent } from './components/copy-custom-url/copy-custom-url.component';
 import { CollectionsContainerComponent } from './components/collections-container/collections-container.component';
 import { CollectionCardComponent } from './components/collection-card/collection-card.component';
+import { CopyCollectionUrlComponent } from './components/copy-collection-url/copy-collection-url.component';
+import { ShareCollectionUrlComponent } from './components/share-collection-url/share-collection-url.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { CollectionCardComponent } from './components/collection-card/collection
     CopyCustomUrlComponent,
     CollectionsContainerComponent,
     CollectionCardComponent,
+    CopyCollectionUrlComponent,
+    ShareCollectionUrlComponent,
   ],
   imports: [
     BrowserModule,

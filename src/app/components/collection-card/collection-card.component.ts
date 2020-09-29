@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faFolderOpen, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { Collections } from 'src/app/models/collections';
+import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
   selector: 'app-collection-card',
@@ -12,9 +13,13 @@ export class CollectionCardComponent implements OnInit {
   public faShare = faShareAlt;
   public faFolderOpen = faFolderOpen;
 
-  constructor() { }
+  constructor(private collectionsServices: CollectionsService) { }
 
   ngOnInit() {
+  }
+
+  selectCollection(collection: Collections) {
+    this.collectionsServices.setSelectedCollection(collection);
   }
 
 }
