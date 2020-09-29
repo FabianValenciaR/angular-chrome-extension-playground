@@ -7,6 +7,7 @@ import { SecondsToStringTimePipe } from './seconds-to-string-time.pipe';
 import { UserFileKeyToUrlPipe } from './user-file-key-to-url.pipe';
 import { CurrentDomainPipe } from './current-domain.pipe';
 import { UnanonimizePipe } from './unanonimize.pipe';
+import { SearchCollectionsPipe } from './search-collections.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UnanonimizePipe } from './unanonimize.pipe';
     SecondsToStringTimePipe,
     UserFileKeyToUrlPipe,
     CurrentDomainPipe,
-    UnanonimizePipe
+    UnanonimizePipe,
+    SearchCollectionsPipe
   ],
   imports: [CommonModule],
   exports: [
@@ -26,7 +28,8 @@ import { UnanonimizePipe } from './unanonimize.pipe';
     SecondsToStringTimePipe,
     UserFileKeyToUrlPipe,
     CurrentDomainPipe,
-    UnanonimizePipe
+    UnanonimizePipe,
+    SearchCollectionsPipe
   ]
 })
 export class PipesModule {}

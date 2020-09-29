@@ -22,6 +22,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ng6-toastr-notifications";
 import { CopyCustomUrlComponent } from './components/copy-custom-url/copy-custom-url.component';
+import { CollectionsContainerComponent } from './components/collections-container/collections-container.component';
+import { CollectionCardComponent } from './components/collection-card/collection-card.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { CopyCustomUrlComponent } from './components/copy-custom-url/copy-custom
     ShareComponent,
     SearchToolComponent,
     CopyCustomUrlComponent,
+    CollectionsContainerComponent,
+    CollectionCardComponent,
   ],
   imports: [
     BrowserModule,
