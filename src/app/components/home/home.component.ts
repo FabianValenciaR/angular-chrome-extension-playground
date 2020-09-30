@@ -43,7 +43,11 @@ export class HomeComponent implements OnInit {
     this.filesService.startHearbeat();
     this.paymentService.RetrieveCustomer();
     this.route.queryParams.forEach(param => {
-      this.selectTab(param.selectedTab);
+      if (param.selectedTab) {
+        this.selectTab(param.selectedTab);
+      } else {
+        this.selectTab('files');
+      }
     });
   }
 
