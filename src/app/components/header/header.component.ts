@@ -29,7 +29,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
-  goToPreviousPage(){
-    this.location.back();
+  goToFiles(){
+    this.router.navigate(['/home'], { queryParams: { selectedTab: 'files' } });
+  }
+
+  goToCollections(){
+    this.router.navigate(['/home'], { queryParams: { selectedTab: 'collections' } });
   }
 }

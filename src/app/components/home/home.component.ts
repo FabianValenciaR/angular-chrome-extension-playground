@@ -9,6 +9,7 @@ import { PaymentService } from "src/app/services/payment.service";
 import { ToastrManager } from "ng6-toastr-notifications";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CollectionsService } from 'src/app/services/collections.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-home",
@@ -31,7 +32,8 @@ export class HomeComponent implements OnInit {
     private paymentService: PaymentService,
     public toastr: ToastrManager,
     private spinner: NgxSpinnerService,
-    private collectionsService: CollectionsService
+    private collectionsService: CollectionsService,
+    private route: ActivatedRoute
   ) {
     this.str2Search = "";
   }
@@ -40,7 +42,9 @@ export class HomeComponent implements OnInit {
     this.filesService.loaded = false;
     this.filesService.startHearbeat();
     this.paymentService.RetrieveCustomer();
-    this.selectTab('files');
+    this.route.queryParams.forEach(param => {
+      this.selectTab(param.selectedTab);
+    });
   }
 
   selectTab(tab: string){
