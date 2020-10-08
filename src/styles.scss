@@ -68,3 +68,18 @@ input:focus{
 .input-form{
   border-right: none;
 }
+
+.no-results-collection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  img {
+      width: 40%;
+  }
+  >div {
+      color: #7c7c7c;
+      margin-top: 20px;
+  }
+}

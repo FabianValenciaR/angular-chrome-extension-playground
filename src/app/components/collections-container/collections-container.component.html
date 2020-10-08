@@ -1,0 +1,8 @@
+<div class="font-weight-bold mb-2">Recent Collections</div>
+<div *ngIf="this.collectionService.actualCollectionsToShow.length == 0" class="no-results-collection">
+  <img src="assets/no-results-img.png">
+  <div>There are no collection to show, plase create a <a href="https://app.slydeck.io/my-collections" target="_blank">new collection</a> to continue.</div>
+</div>
+<div *ngFor="let collection of this.collectionService.actualCollectionsToShow">
+  <app-collection-card [localCollection]="collection"></app-collection-card>
+</div>

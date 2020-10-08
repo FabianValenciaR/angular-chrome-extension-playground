@@ -1,0 +1,68 @@
+<div class="card collection-card">
+  <div class="card-icon">
+    <fa-icon style="color: #f47c26; font-size: 25px;" [icon]="faFolderOpen"></fa-icon>
+  </div>
+  <div class="card-title">
+    <div class="font-weight-bold text-ellipsis">{{localCollection.CollectionName}}</div>
+    <div class="date-card text-ellipsis">{{localCollection.UpdatedAt | date: 'E, MMM d y'}}</div>
+  </div>
+
+  <div class="card-button">
+    <a class="mr-3" routerLink="/copy-collection-url">
+      <button (click)="this.selectCollection(localCollection)" class="copy-button">
+        <svg
+          style="width: 23px"
+          xmlns="http://www.w3.org/2000/svg"
+          width="33.064"
+          height="39.764"
+          viewBox="0 0 33.064 39.764"
+        >
+          <defs>
+            <style>
+              .a,
+              .b {
+                fill: none;
+                stroke: #f47c26;
+                stroke-linejoin: round;
+              }
+
+              .b {
+                stroke-linecap: round;
+              }
+            </style>
+          </defs>
+          <g transform="translate(0.5 0.5)">
+            <path
+              class="a"
+              d="M86.712,139.779v14.871a3.692,3.692,0,0,1-3.586,3.807H67.591A3.693,3.693,0,0,1,64,154.651V131.807A3.765,3.765,0,0,1,67.674,128h7.859a2.015,2.015,0,0,1,1.46.637l9.114,9.6A2.24,2.24,0,0,1,86.712,139.779Z"
+              transform="translate(-64 -119.693)"
+            />
+            <path
+              class="b"
+              d="M200,128v9.345a2.411,2.411,0,0,0,2.338,2.423h9.018"
+              transform="translate(-188.644 -119.693)"
+            />
+            <path
+              class="a"
+              d="M176,40.307v-4.5A3.765,3.765,0,0,1,179.674,32h7.849a2.038,2.038,0,0,1,1.47.637l9.114,9.6a2.212,2.212,0,0,1,.6,1.526V58.651a3.692,3.692,0,0,1-3.586,3.807h-5.1"
+              transform="translate(-166.648 -32)"
+            />
+            <path
+              class="b"
+              d="M312,32v9.345a2.41,2.41,0,0,0,2.338,2.423h9.018"
+              transform="translate(-291.292 -32)"
+            />
+          </g>
+        </svg>
+      </button>
+    </a>
+    <a class="mr-2" routerLink="/share-collection">
+      <button (click)="this.selectCollection(localCollection)" class="share-button">
+        <fa-icon
+          style="color: #ffffff; font-size: 25px"
+          [icon]="faShare"
+        ></fa-icon>
+      </button>
+    </a>
+  </div>
+</div>

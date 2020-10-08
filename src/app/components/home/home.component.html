@@ -1,14 +1,51 @@
 <div class="app-wrapper">
+  <!-- Spinner -->
   <ngx-spinner></ngx-spinner>
-  <div class="row d-flex align-items-center">
+  <!-- Menu -->
+  <ul class="nav nav-tabs w-100 d-flex justify-content-around mb-2">
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: pointer;" id="filesTab" (click)="selectTab('files')">Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: pointer;" id="collectionsTab" (click)="selectTab('collections')">Collections</a>
+    </li>
+  </ul>
+  <!-- Files Actions -->
+  <div *ngIf="selectedTab == 'files'" class="row d-flex align-items-center">
     <div class="col-8">
-      <app-search-tool (receiveTxt2Search)="sendTxt2Search($event)"></app-search-tool>
+      <app-search-tool
+        (receiveTxt2Search)="filterFiles($event)"
+      ></app-search-tool>
     </div>
     <div class="col-4">
       <button class="btn btn-orange" (click)="selectFiles()">UPLOAD</button>
-      <input id="inputFiles" type="file" name="myFile" multiple hidden accept="{{ allowFiles }}"
-        (change)="selectedFiles($event)" />
+      <input
+        id="inputFiles"
+        type="file"
+        name="myFile"
+        multiple
+        hidden
+        accept="{{ allowFiles }}"
+        (change)="selectedFiles($event)"
+      />
     </div>
   </div>
-  <app-files-container [filesToShow]="filesService.totalFiles  | searchFiles: str2Search"></app-files-container>
+  <!-- Collections Action -->
+  <div *ngIf="selectedTab == 'collections'" class="row d-flex align-items-center">
+    <div class="col-8">
+      <app-search-tool
+        (receiveTxt2Search)="filterCollections($event)"
+      ></app-search-tool>
+    </div>
+    <div class="col-4">
+    </div>
+  </div>
+  <!-- Components -->
+  <app-collections-container
+    *ngIf="selectedTab == 'collections'"
+  ></app-collections-container>
+  <app-files-container
+    *ngIf="selectedTab == 'files'"
+    [filesToShow]="filesService.totalFiles | searchFiles: str2Search"
+  ></app-files-container>
 </div>

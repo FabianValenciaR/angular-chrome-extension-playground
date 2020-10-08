@@ -3,7 +3,11 @@
     <img src="./assets/Fox-Icon.png" alt="" />
   </a>
   <a *ngIf="(this.router.url == '/share') || (this.router.url == '/copy-url')" class="btn btn-text-orange p-0"
-    (click)="goToPreviousPage()">
+    (click)="goToFiles()">
+    <fa-icon [icon]="faBack" class="btn-icon mr-2"></fa-icon>Back
+  </a>
+  <a *ngIf="(this.router.url == '/copy-collection-url') || (this.router.url == '/share-collection')" class="btn btn-text-orange p-0"
+    (click)="goToCollections()">
     <fa-icon [icon]="faBack" class="btn-icon mr-2"></fa-icon>Back
   </a>
   <a *ngIf="this.router.url != '/login'" class="btn-log-out ml-auto" (click)="logOut()">

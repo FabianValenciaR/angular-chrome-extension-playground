@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from "@angular/core";
 import { FilesService } from "src/app/services/files.service";
 import { UploadingService } from "src/app/services/uploading.service";
 import * as AWS from "aws-sdk";
@@ -8,6 +8,8 @@ import { environment } from "src/environments/environment";
 import { PaymentService } from "src/app/services/payment.service";
 import { ToastrManager } from "ng6-toastr-notifications";
 import { NgxSpinnerService } from "ngx-spinner";
+import { CollectionsService } from 'src/app/services/collections.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-home",
@@ -15,8 +17,11 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('textSearch', { static: false }) textSearch: ElementRef;
+
   @Output() public receiveTxt2Search = new EventEmitter<string>();
   public str2Search: string;
+  public selectedTab: string;
   public allowFiles: string =
     ".doc,.docx,.pptx,application/pdf, application/msword, application/vnd.ms-powerpoint";
 
@@ -26,7 +31,9 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private paymentService: PaymentService,
     public toastr: ToastrManager,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private collectionsService: CollectionsService,
+    private route: ActivatedRoute
   ) {
     this.str2Search = "";
   }
@@ -35,10 +42,35 @@ export class HomeComponent implements OnInit {
     this.filesService.loaded = false;
     this.filesService.startHearbeat();
     this.paymentService.RetrieveCustomer();
+    this.route.queryParams.forEach(param => {
+      if (param.selectedTab) {
+        this.selectTab(param.selectedTab);
+      } else {
+        this.selectTab('files');
+      }
+    });
   }
 
-  sendTxt2Search(str2Search: string) {
+  selectTab(tab: string){
+    document.getElementById('collectionsTab').classList.remove('active');
+    document.getElementById('filesTab').classList.remove('active');
+    if (tab == "collections") {
+      this.filterCollections('');
+      document.getElementById('collectionsTab').classList.add('active');
+      this.selectedTab = tab;
+    } else if (tab == "files") {
+      this.filterFiles('');
+      document.getElementById('filesTab').classList.add('active');
+      this.selectedTab = tab;
+    }
+  }
+
+  filterFiles(str2Search: string) {
     this.str2Search = str2Search;
+  }
+
+  filterCollections(str2Search: string){
+    this.collectionsService.filterActualFilesToShow(str2Search);
   }
 
   selectFiles() {
