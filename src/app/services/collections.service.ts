@@ -41,7 +41,7 @@ export class CollectionsService {
 
         // using a `setTimeout` allows us to start counting from
         // when the previous `await getCollections` finished
-        this.collectionServiceHearbeatID = setTimeout(heartbeat, 30_000);
+        this.collectionServiceHearbeatID = setTimeout(heartbeat, 4000);
       };
       heartbeat();
     }

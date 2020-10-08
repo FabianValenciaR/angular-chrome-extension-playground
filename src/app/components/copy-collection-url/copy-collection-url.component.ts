@@ -55,6 +55,8 @@ export class CopyCollectionUrlComponent implements OnInit {
       appendUrl = `s_code=${aliasEncoded}`;
     } else if (this.aliasGroup && this.localEmail && this.isEmailValid) {
       appendUrl = `s_code=${emailEncoded}&a_code=${aliasEncoded}`;
+    } else if(!this.aliasGroup && !this.isEmailValid){
+      appendUrl = `s_code=${ btoa(this.userService.currentUser.Email)}`;
     }
     this.generatedLink = `${this.userService.currentDomain}/c/${this.newUrlToken}?${appendUrl}`;
   }

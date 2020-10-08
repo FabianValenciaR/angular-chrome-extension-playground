@@ -7,6 +7,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
   styleUrls: ["./collections-container.component.scss"],
 })
 export class CollectionsContainerComponent implements OnInit {
+  public collectionLoaded: boolean = false;
 
   constructor(public collectionService: CollectionsService) {}
 
